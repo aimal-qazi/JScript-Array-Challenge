@@ -12,7 +12,7 @@ var persons = [
   },
   {
     name: "kashif",
-    city: "Quetta",
+    city: "Lahore",
   },
   {
     name: "akash",
@@ -20,7 +20,7 @@ var persons = [
   },
   {
     name: "kamran",
-    city: "Peshawar",
+    city: "Rawalpindi",
   },
 ];
 
@@ -28,13 +28,23 @@ btn1.addEventListener("click", function () {
   console.log(persons);
 });
 
-var array = {};
+var array = [];
 
 for (let i = 0; i < persons.length; i++) {
   var person = persons[i];
   var name = person.name;
   var city = person.city;
-  array[city] = [name];
+
+  var existingCity = array.filter((item) => Object.keys(item)[0] === city);
+
+  if (existingCity.length !== 0) {
+    existingCity[0][city] += ", " + name;
+  } else {
+    var toArray = {
+      [city]: name,
+    };
+    array.push(toArray);
+  }
 }
 
 btn2.addEventListener("click", function () {
